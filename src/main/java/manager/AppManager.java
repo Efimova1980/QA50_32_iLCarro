@@ -18,19 +18,12 @@ public class AppManager {
         driver.manage().window().maximize();
     }
 
-    @AfterMethod()
+    @AfterMethod(enabled = false)
     public void tearDown(){
         if (driver != null)
             driver.quit();
     }
 
-    public void pause(int time){
-        try {
-            Thread.sleep(time * 1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
 
 

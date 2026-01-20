@@ -7,7 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class HomePage extends BasePage{
-    public HomePage() {
+    public HomePage(WebDriver driver) {
+        setDriver(driver);
         driver.get("https://ilcarro.web.app/search");
         PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
@@ -18,14 +19,12 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[@ng-reflect-router-link='logout']")
     WebElement btnLogout;
 
-    public LoginPage clickBtnLogin(){
+    public void clickBtnLogin(){
         btnLogin.click();
-        return new LoginPage();
     }
 
-    public HomePage clickBthLogout(){
+    public void clickBthLogout(){
         btnLogout.click();
-        return new HomePage();
     }
 
 }
