@@ -51,7 +51,7 @@ public class RegistrationPage extends BasePage{
         inputPassword.sendKeys(user.getPassword());
     }
 
-    public boolean isRegistredDispllayed(){
+    public boolean isRegisteredDisplayed(){
         return isElementDisplayed(popupRegistred);
     }
 
