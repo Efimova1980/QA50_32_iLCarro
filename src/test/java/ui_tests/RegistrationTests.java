@@ -29,6 +29,6 @@ public class RegistrationTests extends AppManager {
         registrationPage.setCheckBoxAgree(true);
         registrationPage.clickYalla();
 
-        Assert.assertTrue(registrationPage.isRegistredDipllayed());
+        Assert.assertTrue(registrationPage.isRegistredDispllayed());
     }
 }
