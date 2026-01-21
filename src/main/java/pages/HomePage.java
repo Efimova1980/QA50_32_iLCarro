@@ -19,6 +19,13 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[@ng-reflect-router-link='logout']")
     WebElement btnLogout;
 
+    @FindBy(xpath = "//a[@ng-reflect-router-link='registration']")
+    WebElement btnSignUp;
+
+    public void clickBtnSignUp(){
+        btnSignUp.click();
+    }
+
     public void clickBtnLogin(){
         btnLogin.click();
     }

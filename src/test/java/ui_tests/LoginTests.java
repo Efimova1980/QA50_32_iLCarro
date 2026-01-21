@@ -5,7 +5,6 @@ import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.LoggedInDialogPage;
 import pages.LoginPage;
 
 public class LoginTests extends AppManager {
