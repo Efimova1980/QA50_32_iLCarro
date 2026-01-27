@@ -53,7 +53,7 @@ public class RegistrationPage extends BasePage{
 
         if (checkBoxAgreeInput.isSelected() != value)
             new Actions(driver)
-                    .moveToElement(checkBoxAgreeLabel, -x/2 + 5,0)
+                    .moveToElement(checkBoxAgreeLabel, -x/2 , 0)
                     .click()
                     .perform();
     }

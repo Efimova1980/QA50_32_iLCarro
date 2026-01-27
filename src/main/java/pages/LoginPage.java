@@ -34,7 +34,7 @@ public class LoginPage extends BasePage{
         inputPassword.sendKeys(user.getPassword());
     }
 
-    public boolean isLoggedInDipllayed(){
+    public boolean isLoggedInDisplayed(){
         return isElementDisplayed(popupSuccessfullLogin);
     }
 }

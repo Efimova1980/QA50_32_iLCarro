@@ -6,7 +6,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import pages.PopupPage;
 import pages.RegistrationPage;
+import static utils.UserFactory.*;
 
 import java.util.Random;
 
@@ -31,12 +33,20 @@ public class RegistrationTests extends AppManager {
                 .password("Pass1234!")
                 .build();
 
-        goToRegistrationPage();
         registrationPage.typeRegistrationForm(user);
         //registrationPage.setCheckBoxAgree_WithJavascript(true);
         registrationPage.setCheckBoxAgree_WithActions(true);
         registrationPage.clickYalla();
+        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("You are logged in success"));
+        //Assert.assertTrue(registrationPage.isRegisteredDisplayed());
+    }
 
-        Assert.assertTrue(registrationPage.isRegisteredDisplayed());
+    @Test
+    public void RegistrationPositiveTest_WithFaker(){
+        User user = positiveUser();
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.setCheckBoxAgree_WithActions(true);
+        registrationPage.clickYalla();
+        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("You are logged in success"));
     }
 }
