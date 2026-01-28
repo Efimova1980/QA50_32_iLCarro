@@ -43,4 +43,8 @@ public class BasePage {
         return new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.textToBePresentInElement(element,text));
     }
+
+    public boolean isElementDisabled(WebElement element){
+        return element.isDisplayed();
+    }
 }

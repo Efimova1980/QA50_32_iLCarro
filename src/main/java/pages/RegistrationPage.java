@@ -2,6 +2,7 @@ package pages;
 
 import dto.User;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -65,8 +66,20 @@ public class RegistrationPage extends BasePage{
         inputPassword.sendKeys(user.getPassword());
     }
 
+    public void typeRegistrationFormEmpty(){
+        inputName.sendKeys(Keys.TAB);
+        inputLastName.sendKeys(Keys.TAB);
+        inputEmail.sendKeys(Keys.TAB);
+        inputPassword.sendKeys(Keys.TAB);
+    }
+
     public boolean isRegisteredDisplayed(){
         return isElementDisplayed(popupRegistred);
     }
+
+    public boolean isBtnYallaDisabled(){
+        return isElementDisabled(btnYalla);
+    }
+
 
 }
