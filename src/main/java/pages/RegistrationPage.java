@@ -60,10 +60,10 @@ public class RegistrationPage extends BasePage{
     }
 
     public void typeRegistrationForm(User user){
-        inputName.sendKeys(user.getFirstName());
-        inputLastName.sendKeys(user.getLastName());
-        inputEmail.sendKeys(user.getUsername());
-        inputPassword.sendKeys(user.getPassword());
+        inputName.sendKeys(user.getFirstName(), Keys.TAB);
+        inputLastName.sendKeys(user.getLastName(), Keys.TAB);
+        inputEmail.sendKeys(user.getUsername(), Keys.TAB);
+        inputPassword.sendKeys(user.getPassword(), Keys.TAB);
     }
 
     public void typeRegistrationFormEmpty(){
@@ -77,9 +77,7 @@ public class RegistrationPage extends BasePage{
         return isElementDisplayed(popupRegistred);
     }
 
-    public boolean isBtnYallaDisabled(){
-        return isElementDisabled(btnYalla);
+    public boolean isBtnYallaEnabled(){
+        return isElementEnabled(btnYalla);
     }
-
-
 }

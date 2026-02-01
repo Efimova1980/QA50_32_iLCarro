@@ -1,6 +1,7 @@
 package pages;
 
 import dto.User;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,12 +30,17 @@ public class LoginPage extends BasePage{
         btnYalla.click();
     }
 
+    public boolean isBtnYallaEnabled(){
+        return isElementEnabled(btnYalla);
+    }
+
     public void typeLoginForm(User user){
-        inputEmail.sendKeys(user.getUsername());
-        inputPassword.sendKeys(user.getPassword());
+        inputEmail.sendKeys(user.getUsername(), Keys.TAB);
+        inputPassword.sendKeys(user.getPassword(), Keys.TAB);
     }
 
     public boolean isLoggedInDisplayed(){
         return isElementDisplayed(popupSuccessfullLogin);
     }
+
 }

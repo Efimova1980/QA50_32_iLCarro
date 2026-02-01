@@ -44,7 +44,7 @@ public class BasePage {
                 .until(ExpectedConditions.textToBePresentInElement(element,text));
     }
 
-    public boolean isElementDisabled(WebElement element){
-        return element.isDisplayed();
+    public boolean isElementEnabled(WebElement element){
+        return element.isEnabled();
     }
 }

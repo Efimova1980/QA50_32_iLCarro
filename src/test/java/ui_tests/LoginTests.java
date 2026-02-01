@@ -9,7 +9,9 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopupPage;
-import pages.RegistrationPage;
+
+import static utils.UserFactory.emptyUser;
+import static utils.UserFactory.positiveUser;
 
 public class LoginTests extends AppManager {
     LoginPage loginPage;
@@ -20,13 +22,14 @@ public class LoginTests extends AppManager {
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
     }
+
+    //------------------LOGIN POSITIVE TESTS----------------------------
     @Test
     public void loginPositiveTest(){
         User user = User.builder()
                 .username("harry@gmail.com")
                 .password("Pass1234!")
                 .build();
-
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
         Assert.assertTrue(loginPage.isLoggedInDisplayed());
@@ -41,10 +44,11 @@ public class LoginTests extends AppManager {
                 .build();
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
-        //Assert.assertTrue(loginPage.isLoggedInDipllayed());
         Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("Logged in success"));
     }
 
+    //------------------LOGIN NEGATIVE TESTS----------------------------
+    //in the class
     @Test
     public void loginNegativeTest_WrongPassword_WOSpecSymbol(){
         User user = User.builder()
@@ -56,6 +60,7 @@ public class LoginTests extends AppManager {
         Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("Login or Password incorrect"));
     }
 
+    //in the class
     //softAssert example
     @Test
     public void loginNegativeTest_WrongEmail_EmptyPassword(){
@@ -66,9 +71,77 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
         softAssert.assertTrue(loginPage.isTextInErrorPresent("It'snot look like email"), "validate field email");
-        //System.out.println("After first assert");
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "validate field password");
-        //System.out.println("After second Assert");
         softAssert.assertAll();
     }
+
+
+
+    //------------------------HOMEWORK 7 LOGIN NEGATIVE TESTS-------------------------------------------
+    @Test
+    public void loginNegativeTest_UserIsNotRegistered(){
+        loginPage.typeLoginForm(positiveUser());
+        loginPage.clickBtnYalla();
+        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("Login or Password incorrect"));
+    }
+
+    @Test
+    public void loginNegativeTest_PasswordRight_EmailValidButWrong(){
+        User user = User.builder()
+                .username("harry1@gmail.com")
+                .password("Pass1234!")
+                .build();
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("Login or Password incorrect"));
+    }
+
+    @Test
+    public void loginNegativeTest_EmailRight_PasswordValidButWrong(){
+        User user = User.builder()
+                .username("harry@gmail.com")
+                .password("Pass1234!   ")
+                .build();
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("Login or Password incorrect"));
+    }
+
+    @Test
+    public void loginNegativeTest_EmptyFields(){
+        loginPage.typeLoginForm(emptyUser());
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required")
+                , "validate field email - empty");
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required")
+                , "validate field password - empty");
+        softAssert.assertFalse(loginPage.isBtnYallaEnabled(), "validate button Yalla enabled");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_EmptyEmail_PassswordRight(){
+        User user = User.builder()
+                .username("")
+                .password("Pass1234!")
+                .build();
+        loginPage.typeLoginForm(user);
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required")
+                , "validate field email - empty");
+        softAssert.assertFalse(loginPage.isBtnYallaEnabled(), "validate button Yalla enabled");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_EmptyPassword_EmailRight(){
+        User user = User.builder()
+                .username("harry@gmail.com")
+                .password("")
+                .build();
+        loginPage.typeLoginForm(user);
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required")
+                , "validate field password - empty");
+        softAssert.assertFalse(loginPage.isBtnYallaEnabled(), "validate button Yalla enabled");
+        softAssert.assertAll();
+    }
+
 }

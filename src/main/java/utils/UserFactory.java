@@ -14,4 +14,14 @@ public class UserFactory {
                 .build();
         return user;
     }
+
+    public static User emptyUser(){
+        User user = User.builder()
+                .firstName("")
+                .lastName("")
+                .username("")
+                .password("")
+                .build();
+        return user;
+    }
 }
