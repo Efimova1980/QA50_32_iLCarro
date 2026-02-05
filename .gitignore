@@ -18,7 +18,6 @@ out/
 !**/src/test/**/out/
 src/test/properties
 
-
 ### Eclipse ###
 .apt_generated
 .classpath

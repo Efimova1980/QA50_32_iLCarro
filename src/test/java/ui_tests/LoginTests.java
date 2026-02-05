@@ -9,6 +9,7 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopupPage;
+import utils.PropertiesReader;
 
 import static utils.UserFactory.emptyUser;
 import static utils.UserFactory.positiveUser;
@@ -27,8 +28,8 @@ public class LoginTests extends AppManager {
     @Test
     public void loginPositiveTest(){
         User user = User.builder()
-                .username("harry@gmail.com")
-                .password("Pass1234!")
+                .username(PropertiesReader.getProperty("base.properties","login"))
+                .password(PropertiesReader.getProperty("base.properties","password"))
                 .build();
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
@@ -39,8 +40,8 @@ public class LoginTests extends AppManager {
     @Test
     public void loginPositiveTest_WithPopupPage(){
         User user = User.builder()
-                .username("harry@gmail.com")
-                .password("Pass1234!")
+                .username(PropertiesReader.getProperty("base.properties","login"))
+                .password(PropertiesReader.getProperty("base.properties","password"))
                 .build();
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
@@ -52,7 +53,7 @@ public class LoginTests extends AppManager {
     @Test
     public void loginNegativeTest_WrongPassword_WOSpecSymbol(){
         User user = User.builder()
-                .username("harry@gmail.com")
+                .username(PropertiesReader.getProperty("base.properties","login"))
                 .password("Pass1234")
                 .build();
         loginPage.typeLoginForm(user);
@@ -89,7 +90,7 @@ public class LoginTests extends AppManager {
     public void loginNegativeTest_PasswordRight_EmailValidButWrong(){
         User user = User.builder()
                 .username("harry1@gmail.com")
-                .password("Pass1234!")
+                .username(PropertiesReader.getProperty("base.properties","password"))
                 .build();
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
@@ -99,7 +100,7 @@ public class LoginTests extends AppManager {
     @Test
     public void loginNegativeTest_EmailRight_PasswordValidButWrong(){
         User user = User.builder()
-                .username("harry@gmail.com")
+                .username(PropertiesReader.getProperty("base.properties","login"))
                 .password("Pass1234!   ")
                 .build();
         loginPage.typeLoginForm(user);
@@ -122,7 +123,7 @@ public class LoginTests extends AppManager {
     public void loginNegativeTest_EmptyEmail_PassswordRight(){
         User user = User.builder()
                 .username("")
-                .password("Pass1234!")
+                .username(PropertiesReader.getProperty("base.properties","password"))
                 .build();
         loginPage.typeLoginForm(user);
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required")
@@ -134,7 +135,7 @@ public class LoginTests extends AppManager {
     @Test
     public void loginNegativeTest_EmptyPassword_EmailRight(){
         User user = User.builder()
-                .username("harry@gmail.com")
+                .username(PropertiesReader.getProperty("base.properties","login"))
                 .password("")
                 .build();
         loginPage.typeLoginForm(user);
