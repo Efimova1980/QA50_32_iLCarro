@@ -11,6 +11,8 @@ import pages.LoginPage;
 import pages.PopupPage;
 import utils.PropertiesReader;
 
+import java.lang.reflect.Method;
+
 import static utils.UserFactory.emptyUser;
 import static utils.UserFactory.positiveUser;
 
@@ -26,11 +28,12 @@ public class LoginTests extends AppManager {
 
     //------------------LOGIN POSITIVE TESTS----------------------------
     @Test
-    public void loginPositiveTest(){
+    public void loginPositiveTest(Method method){
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties","login"))
                 .password(PropertiesReader.getProperty("base.properties","password"))
                 .build();
+        logger.info("start test " + method.getName() + " with " + user);
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
         Assert.assertTrue(loginPage.isLoggedInDisplayed());
