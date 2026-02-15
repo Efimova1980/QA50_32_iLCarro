@@ -54,11 +54,12 @@ public class LoginTests extends AppManager {
     //------------------LOGIN NEGATIVE TESTS----------------------------
     //in the class
     @Test
-    public void loginNegativeTest_WrongPassword_WOSpecSymbol(){
+    public void loginNegativeTest_WrongPassword_WOSpecSymbol(Method method){
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties","login"))
                 .password("Pass1234")
                 .build();
+        logger.info("start test " + method.getName() + " with " + user);
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
         Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("Login or Password incorrect"));
