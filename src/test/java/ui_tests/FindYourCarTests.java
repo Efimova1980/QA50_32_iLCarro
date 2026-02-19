@@ -32,7 +32,7 @@ public class FindYourCarTests extends AppManager {
     public void findYourCarPositiveTestWithCalandar(){
         String city = "Rehovot";
         LocalDate startDate = LocalDate.of(2026,3,12);
-        LocalDate endDate = LocalDate.of(2027,1,10);
+        LocalDate endDate = LocalDate.of(2026,3,22);
         homePage.typeFindYourCarFormWithCalandar(city, startDate, endDate);
         homePage.clickBtnYalla_WithWait();
         Assert.assertTrue(homePage.urlContains("results",2));
