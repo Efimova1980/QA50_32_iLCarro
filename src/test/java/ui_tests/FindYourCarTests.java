@@ -1,12 +1,17 @@
 package ui_tests;
 
 import manager.AppManager;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import utils.TestNGListener;
 
 import java.time.LocalDate;
+
+@Listeners(TestNGListener.class)
 
 public class FindYourCarTests extends AppManager {
     HomePage homePage;
@@ -91,5 +96,12 @@ public class FindYourCarTests extends AppManager {
         Assert.assertTrue(homePage.isTextInErrorPresent("You can't pick date before today"));
     }
 
-
+    @Test(expectedExceptions = java.time.DateTimeException.class)
+    public void findYourCarNegativeTest_WrongDate_DateInvalid() {
+        String city = "Rehovot";
+        LocalDate startDate = LocalDate.of(2024, 2, 30);//wrong date in FEB
+        LocalDate endDate = LocalDate.of(2024, 3, 22);
+        homePage.typeFindYourCarForm_WOJavascript(city, startDate, endDate);
+        homePage.clickBtnYalla();
+    }
 }

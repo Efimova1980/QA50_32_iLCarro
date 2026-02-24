@@ -87,13 +87,29 @@ public class HomePage extends BasePage{
                 .xpath("//td[@aria-label='" + year + "']"));
         btnYear.click();
 
-        int month = date.getMonth().getValue();
-        typeMonth(Months.values()[month-1]);
+//через enum
+//        int month = date.getMonth().getValue();
+//        typeMonth(Months.values()[month-1]);
+
+        //td[@aria-label="March 2026"] другой локатор для месяца
+        StringBuilder month = new StringBuilder();
+        month.append(date.getMonth().toString().substring(0,1).toUpperCase())
+                .append(date.getMonth().toString().substring(1).toLowerCase());
+        WebElement btnMonth = driver.findElement(By
+                .xpath("//td[@aria-label='" + month +" "+ year + "']"));
+        btnMonth.click();
 
         //div[text()=' 1 ']
-        String day = Integer.toString(date.getDayOfMonth());
+//        String day = Integer.toString(date.getDayOfMonth());
+//        WebElement btnDay = driver.findElement(By
+//                .xpath("//div[text()=' " + day + " ']"));
+//        btnDay.click();
+
+        //td[@aria-label="March 18, 2026"] другой локатор для дня
+        StringBuilder day = new StringBuilder();
+        day.append(date.getDayOfMonth());
         WebElement btnDay = driver.findElement(By
-                .xpath("//div[text()=' " + day + " ']"));
+                .xpath("//td[@aria-label='" + month +" " + day + ", " + year + "']"));
         btnDay.click();
     }
 
