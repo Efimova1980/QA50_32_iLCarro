@@ -51,7 +51,7 @@ public class BasePage {
         return element.isEnabled();
     }
 
-    public <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
+    public static  <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
         WebElement button = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(item.getLocator())));
         button.click();
@@ -90,4 +90,6 @@ public class BasePage {
         }
 
     }
+
+
 }

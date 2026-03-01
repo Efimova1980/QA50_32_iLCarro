@@ -25,13 +25,16 @@ public class AppManager {
     public void setup(){
         logger.info("Start testing: " + LocalDate.now() + " : " + LocalTime.now());
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+
         WebDriverListener webDriverListener = new WDListener();
         driver = new EventFiringDecorator<>(webDriverListener)
                 .decorate(driver);
+
+        driver.manage().window().maximize();
+
     }
 
-    @AfterMethod(enabled = true)
+    @AfterMethod(enabled = false)
     public void tearDown(){
         logger.info("Stop testing: " + LocalDate.now() + " : " + LocalTime.now());
         if (driver != null)
