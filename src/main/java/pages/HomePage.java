@@ -5,8 +5,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertiesReader;
+import utils.enums.FooterMenuItem;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -122,5 +126,11 @@ public class HomePage extends BasePage{
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector(\"button[type='submit']\")" +
                 ".removeAttribute(\"disabled\")");
+    }
+
+    public boolean clickIconFooter(FooterMenuItem item, String title){
+        driver.findElement(By.xpath(item.getLocator())).click();
+        return new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.titleContains(title));
     }
 }
