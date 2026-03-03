@@ -26,6 +26,13 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//h2[text()='Logged in success']")
     WebElement popupSuccessfullLogin;
 
+    @FindBy(xpath = "//button[text()='Ok']")
+    WebElement btnOk;
+
+    public void clickBtnOk(){
+        clickWait(btnOk,2);
+    }
+
     public void clickBtnYalla(){
         btnYalla.click();
     }

@@ -16,10 +16,10 @@ public class Car {
     private String model;
     private String year;
     private Fuel fuel;
-    private int seats;
-    private String classAuto;
-    private String regNumber;
-    private double price;
+    private Integer seats;
+    private String carClass;
+    private String serialNumber;
+    private Double pricePerDay;
     private String about;
     private String image;
 }

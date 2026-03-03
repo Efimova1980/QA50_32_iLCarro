@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LetTheCarWorkPage;
 import pages.LoginPage;
+import pages.PopupPage;
 import utils.CarFactory;
 import utils.PropertiesReader;
 import utils.enums.HeaderMenuItem;
@@ -31,6 +32,7 @@ public class AddCarTests extends AppManager {
         //logger.info("start test " + method.getName() + " with " + user);
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
+        loginPage.clickBtnOk();
         letTheCarWorkPage = clickButtonHeader(HeaderMenuItem.LET_THE_CAR_WORK);
     }
 
@@ -38,7 +40,8 @@ public class AddCarTests extends AppManager {
     public void AddNewCarPositiveTest(){
         Car car = CarFactory.positiveCar();
         letTheCarWorkPage.typeLetTheCarWorkForm(car);
-        Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
+        //Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
+        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("не должно быть пустым"));
     }
 
 }

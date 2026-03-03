@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import java.io.File;
-import java.util.List;
 
 public class LetTheCarWorkPage extends BasePage {
     public LetTheCarWorkPage(WebDriver driver) {
@@ -45,8 +44,6 @@ public class LetTheCarWorkPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnSubmit;
 
-
-
     public void typeLetTheCarWorkForm(Car car){
         inputLocation.sendKeys(car.getCity());
         //typeCity_WithJS(car.getCity());
@@ -55,9 +52,9 @@ public class LetTheCarWorkPage extends BasePage {
         inputYear.sendKeys(car.getYear());
         typeFuel(car.getFuel());
         inputSeats.sendKeys(Integer.toString(car.getSeats()));
-        inputClass.sendKeys(car.getClassAuto());
-        inputSerialNumber.sendKeys(car.getRegNumber());
-        inputPrice.sendKeys(Double.toString(car.getPrice()));
+        inputClass.sendKeys(car.getCarClass());
+        inputSerialNumber.sendKeys(car.getSerialNumber());
+        inputPrice.sendKeys(Double.toString(car.getPricePerDay()));
         inputAbout.sendKeys(car.getAbout());
         typeImage(car.getImage());
         clickBtnSubmit_WithJS();
