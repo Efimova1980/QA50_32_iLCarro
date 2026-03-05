@@ -9,10 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertiesReader;
 import utils.enums.FooterMenuItem;
+import utils.enums.HeaderMenuItem;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
 public class HomePage extends BasePage{
@@ -128,7 +128,13 @@ public class HomePage extends BasePage{
                 ".removeAttribute(\"disabled\")");
     }
 
-    public boolean clickIconFooter(FooterMenuItem item, String title){
+    public boolean isTitlePresentOnClickIconFooter(FooterMenuItem item, String title){
+        driver.findElement(By.xpath(item.getLocator())).click();
+        return new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.titleContains(title));
+    }
+
+    public boolean isTitlePresentOnClickBtnHeader(HeaderMenuItem item, String title){
         driver.findElement(By.xpath(item.getLocator())).click();
         return new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.titleContains(title));

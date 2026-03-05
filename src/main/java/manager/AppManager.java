@@ -34,7 +34,7 @@ public class AppManager {
 
     }
 
-    @AfterMethod(enabled = false)
+    @AfterMethod(enabled = true)
     public void tearDown(){
         logger.info("Stop testing: " + LocalDate.now() + " : " + LocalTime.now());
         if (driver != null)

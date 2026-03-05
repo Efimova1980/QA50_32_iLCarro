@@ -9,8 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.time.Duration;
 
 public class LetTheCarWorkPage extends BasePage {
     public LetTheCarWorkPage(WebDriver driver) {
@@ -44,30 +47,40 @@ public class LetTheCarWorkPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnSubmit;
 
+
+
     public void typeLetTheCarWorkForm(Car car){
         inputLocation.sendKeys(car.getCity());
-        //typeCity_WithJS(car.getCity());
+        typeCity_WithJS(car.getCity());
         inputManufacture.sendKeys(car.getManufacture());
         inputModel.sendKeys(car.getModel());
         inputYear.sendKeys(car.getYear());
         typeFuel(car.getFuel());
-        inputSeats.sendKeys(Integer.toString(car.getSeats()));
+        inputSeats.sendKeys("" + car.getSeats());
         inputClass.sendKeys(car.getCarClass());
         inputSerialNumber.sendKeys(car.getSerialNumber());
         inputPrice.sendKeys(Double.toString(car.getPricePerDay()));
         inputAbout.sendKeys(car.getAbout());
         typeImage(car.getImage());
-        clickBtnSubmit_WithJS();
     }
 
-    /*
+
     private void typeCity_WithJS(String city) {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
                 inputLocation, city
         );
     }
-    */
+
+    public void typeSeats(String seats){
+        inputSeats.clear();
+        inputSeats.sendKeys(seats);
+    }
+
+    public void typePrice(String s) {
+        inputPrice.clear();
+        inputPrice.sendKeys(s);
+    }
 
     private void typeImage(String img) {
         File photo = new File(img);
@@ -91,6 +104,8 @@ public class LetTheCarWorkPage extends BasePage {
     public boolean isButtonSubmitEnabled(){
         return btnSubmit.isEnabled();
     }
+
+
 
 
 }

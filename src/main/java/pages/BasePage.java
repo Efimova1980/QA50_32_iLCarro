@@ -18,15 +18,19 @@ public class BasePage {
         BasePage.driver = driver;
     }
 
-    @FindBy(xpath = "//div[@class='error']")
+//    @FindBy(xpath = "//div[@class='error']")
+//    List<WebElement> listErrors;
+
+    @FindBy(css = ".error")
     List<WebElement> listErrors;
 
     public boolean isTextInErrorPresent(String text){
         if (listErrors == null || listErrors.isEmpty())
             return false;
-        for (WebElement element:listErrors)
+        for (WebElement element:listErrors) {
             if (element.getText().contains(text))
                 return true;
+        }
         return false;
     }
 
@@ -52,9 +56,14 @@ public class BasePage {
     }
 
     public static  <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
-        WebElement button = new WebDriverWait(driver, Duration.ofSeconds(10))
+
+        WebElement button = new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(item.getLocator())));
+
+        new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(item.getLocator())));
         button.click();
+
         switch (item){
             case LOGIN -> {
                 return (T) new LoginPage(driver);
