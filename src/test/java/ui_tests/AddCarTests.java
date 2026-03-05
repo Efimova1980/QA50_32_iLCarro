@@ -14,6 +14,8 @@ import utils.CarFactory;
 import utils.PropertiesReader;
 import utils.enums.HeaderMenuItem;
 
+import java.lang.reflect.Method;
+
 import static pages.BasePage.clickButtonHeader;
 
 public class AddCarTests extends AppManager {
@@ -22,18 +24,18 @@ public class AddCarTests extends AppManager {
     LetTheCarWorkPage letTheCarWorkPage;
 
     @BeforeMethod
-    public void login() {
+    public void login(Method method) {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties", "login"))
                 .password(PropertiesReader.getProperty("base.properties", "password"))
                 .build();
-        //logger.info("start test " + method.getName() + " with " + user);
+        logger.info("start test " + method.getName() + " with " + user);
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
         loginPage.clickBtnOk();
-        //loginPage.pause(2);
+        //loginPage.pause(2);//иногда падает 1-2 теста из-за того, что не успевает прорисоваться меню верхнее
         letTheCarWorkPage = clickButtonHeader(HeaderMenuItem.LET_THE_CAR_WORK);
     }
 
@@ -41,6 +43,7 @@ public class AddCarTests extends AppManager {
     public void AddNewCarPositiveTest(){
         Car car = CarFactory.positiveCar();
         letTheCarWorkPage.typeLetTheCarWorkForm(car);
+        letTheCarWorkPage.typeImage(car.getImage());
         letTheCarWorkPage.clickBtnSubmit_WithJS();
         //Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
         Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("не должно быть пустым"));
@@ -163,6 +166,4 @@ public class AddCarTests extends AppManager {
         letTheCarWorkPage.typePrice("1000,01");
         Assert.assertTrue(homePage.isTextInErrorPresent("To much big price"));
     }
-
-
 }

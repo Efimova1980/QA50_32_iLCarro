@@ -18,7 +18,7 @@ import java.time.Duration;
 public class LetTheCarWorkPage extends BasePage {
     public LetTheCarWorkPage(WebDriver driver) {
         setDriver(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver,15), this);
     }
 
     @FindBy(id = "pickUpPlace")
@@ -47,8 +47,6 @@ public class LetTheCarWorkPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnSubmit;
 
-
-
     public void typeLetTheCarWorkForm(Car car){
         inputLocation.sendKeys(car.getCity());
         typeCity_WithJS(car.getCity());
@@ -61,7 +59,7 @@ public class LetTheCarWorkPage extends BasePage {
         inputSerialNumber.sendKeys(car.getSerialNumber());
         inputPrice.sendKeys(Double.toString(car.getPricePerDay()));
         inputAbout.sendKeys(car.getAbout());
-        typeImage(car.getImage());
+        //typeImage(car.getImage());
     }
 
 
@@ -82,7 +80,7 @@ public class LetTheCarWorkPage extends BasePage {
         inputPrice.sendKeys(s);
     }
 
-    private void typeImage(String img) {
+    public void typeImage(String img) {
         File photo = new File(img);
         inputFile.sendKeys(photo.getAbsolutePath());
         pause(3);

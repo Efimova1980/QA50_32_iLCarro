@@ -18,8 +18,7 @@ public class WDListener implements WebDriverListener {
     @Override
     public void onError(Object target, Method method, Object[] args, InvocationTargetException e) {
         WebDriverListener.super.onError(target, method, args, e);
-        logger.error("created exception {}"
-                + e.toString());
+        logger.error("created exception in method --> {}", method.getName());
     }
 
     @Override
@@ -61,8 +60,7 @@ public class WDListener implements WebDriverListener {
     @Override
     public void afterExecuteScript(WebDriver driver, String script, Object[] args, Object result) {
         WebDriverListener.super.afterExecuteScript(driver, script, args, result);
-        logger.info("script executed --> {}",
-                script.toString());
+        logger.info("script executed --> {}", script);
     }
 
     @Override
@@ -77,9 +75,5 @@ public class WDListener implements WebDriverListener {
         WebDriverListener.super.afterMaximize(window);
         logger.info("After maximize: {}", window.getSize());
     }
-
-
-
-
 
 }

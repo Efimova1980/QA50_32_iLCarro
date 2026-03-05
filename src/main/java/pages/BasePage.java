@@ -13,16 +13,17 @@ import java.time.Duration;
 import java.util.List;
 
 public class BasePage {
-    static WebDriver driver;
-    public static void setDriver(WebDriver driver) {
-        BasePage.driver = driver;
-    }
 
-//    @FindBy(xpath = "//div[@class='error']")
-//    List<WebElement> listErrors;
+    static WebDriver driver;
 
     @FindBy(css = ".error")
     List<WebElement> listErrors;
+    //    @FindBy(xpath = "//div[@class='error']")
+    //    List<WebElement> listErrors;
+
+    public static void setDriver(WebDriver driver) {
+        BasePage.driver = driver;
+    }
 
     public boolean isTextInErrorPresent(String text){
         if (listErrors == null || listErrors.isEmpty())
@@ -36,7 +37,7 @@ public class BasePage {
 
     public void pause(int time){
         try {
-            Thread.sleep(time * 1000);
+            Thread.sleep(time * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -47,7 +48,7 @@ public class BasePage {
     }
 
     public boolean isTextInElementPresentWait(WebElement element, String text){
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
+        return new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.textToBePresentInElement(element,text));
     }
 
@@ -56,10 +57,10 @@ public class BasePage {
     }
 
     public static  <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
-
+        //элемент видимый
         WebElement button = new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(item.getLocator())));
-
+        //элемент кликабельный
         new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(item.getLocator())));
         button.click();
@@ -94,7 +95,7 @@ public class BasePage {
             return new WebDriverWait(driver, Duration.ofSeconds(time))
                     .until(ExpectedConditions.urlContains(partOfUrl));
         }catch (TimeoutException e){
-            e.printStackTrace();
+            System.err.println("Произошла ошибка при выполнении urlContains" + e);
             return false;
         }
 
