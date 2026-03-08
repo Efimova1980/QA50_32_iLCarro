@@ -20,7 +20,7 @@ public class LoginTests extends AppManager {
     LoginPage loginPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToLoginPage(){
         new HomePage(getDriver()).clickBtnLogin();
         loginPage = new LoginPage(getDriver());
@@ -40,7 +40,7 @@ public class LoginTests extends AppManager {
     }
 
 
-    @Test
+    @Test(groups = "smoke")
     public void loginPositiveTest_WithPopupPage(){
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties","login"))

@@ -16,12 +16,12 @@ import java.time.LocalDate;
 public class FindYourCarTests extends AppManager {
     HomePage homePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openHomePage(){
         homePage= new HomePage(getDriver());
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void findYourCarPositiveTest(){
         String city = "Rehovot";
         LocalDate startDate = LocalDate.of(2026,3,12);

@@ -17,7 +17,7 @@ public class RegistrationTests extends AppManager {
     RegistrationPage registrationPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage(){
         new HomePage(getDriver()).clickBtnSignUp();
         registrationPage = new RegistrationPage(getDriver());
@@ -46,7 +46,7 @@ public class RegistrationTests extends AppManager {
     }
 
     //in the class
-    @Test
+    @Test(groups = {"smoke", "reg-regression"})
     public void registrationPositiveTest_WithFaker(){
         User user = positiveUser();
         registrationPage.typeRegistrationForm(user);
@@ -57,7 +57,7 @@ public class RegistrationTests extends AppManager {
 
     //--------------------------------NEGATIVE TESTS-------------------------------------
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_EmptyFields(){
         registrationPage.typeRegistrationFormEmpty();
         registrationPage.setCheckBoxAgree_WithActions(true);
@@ -69,7 +69,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_UserAlreadyExists(){
         User user = new User("ola_mail@gmail.com","Pass1234!", "Ola", "Ola");
         registrationPage.typeRegistrationForm(user);
@@ -79,7 +79,7 @@ public class RegistrationTests extends AppManager {
     }
 
     //-------------------------------HOMEWORK 7 -----------------------------------------------
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoCheckboxAgree(){
         User user = positiveUser();
         registrationPage.typeRegistrationForm(user);
@@ -96,7 +96,7 @@ public class RegistrationTests extends AppManager {
     no digits
      */
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_EmptyPassword(){
         User user = positiveUser();
         user.setPassword("");
@@ -108,7 +108,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_ShortPassword(){
         User user = positiveUser();
         user.setPassword("Pas123#");
@@ -120,7 +120,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoSpecialCharInPassword(){
         User user = positiveUser();
         user.setPassword("Pass1234");
@@ -132,7 +132,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoBigCharInPassword(){
         User user = positiveUser();
         user.setPassword("pass123#");
@@ -144,7 +144,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoSmallCharInPassword(){
         User user = positiveUser();
         user.setPassword("PASS1234#");
@@ -156,7 +156,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoDigitsInPassword(){
         User user = positiveUser();
         user.setPassword("Password#");
@@ -179,7 +179,7 @@ public class RegistrationTests extends AppManager {
     unresolved symbol in email
      */
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_EmptyEmail(){
         User user = positiveUser();
         user.setUsername("");
@@ -191,7 +191,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoMonkeyInEmail(){
         Random rn = new Random();
         String email = "mail" + rn.nextInt(10000) + "gmail.com";
@@ -206,7 +206,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_TwoMonkeyInEmail(){
         Random rn = new Random();
         String email = "mail" + rn.nextInt(10000) + "@@gmail.com";
@@ -221,7 +221,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoCharsAfterMonkeyInEmail(){
         Random rn = new Random();
         String email = "mail" + rn.nextInt(10000) + "@";
@@ -236,7 +236,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_NoCharsBeforeMonkeyInEmail(){
         Random rn = new Random();
         String email = "@" + rn.nextInt(10000) + "gmail.com";
@@ -251,7 +251,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_CyrillicCharsInEmail(){
         Random rn = new Random();
         String email = "почта" + rn.nextInt(10000) + "@gmail.com";
@@ -266,7 +266,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "reg-regression")
     public void registrationNegativeTest_UnresolvedCharInEmail(){
         Random rn = new Random();
         String email = "%@" + rn.nextInt(10000) + "gmail.com";
