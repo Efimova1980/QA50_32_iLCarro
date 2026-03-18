@@ -57,10 +57,10 @@ public class BasePage {
     }
 
     public static  <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
-        //элемент видимый
+        //element visible
         WebElement button = new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(item.getLocator())));
-        //элемент кликабельный
+        //element clickable
         new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(item.getLocator())));
         button.click();
@@ -95,7 +95,7 @@ public class BasePage {
             return new WebDriverWait(driver, Duration.ofSeconds(time))
                     .until(ExpectedConditions.urlContains(partOfUrl));
         }catch (TimeoutException e){
-            System.err.println("Произошла ошибка при выполнении urlContains" + e);
+            System.err.println("Error in runtime urlContains" + e);
             return false;
         }
 

@@ -66,7 +66,7 @@ public class NavigationTests extends AppManager {
 
     @BeforeMethod(onlyForGroups = "loginRequired")
     public void login() {
-        // логин только для тестов этой группы
+
         new HomePage(getDriver());
         LoginPage loginPage = BasePage.clickButtonHeader(HeaderMenuItem.LOGIN);
         User user = User.builder()

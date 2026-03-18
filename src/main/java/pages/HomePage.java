@@ -91,7 +91,7 @@ public class HomePage extends BasePage{
                 .xpath("//td[@aria-label='" + year + "']"));
         btnYear.click();
 
-//через enum
+//by enum
 //        int month = date.getMonth().getValue();
 //        typeMonth(Months.values()[month-1]);
 
