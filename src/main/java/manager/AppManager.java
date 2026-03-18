@@ -23,12 +23,12 @@ public class AppManager {
 
     @BeforeMethod(alwaysRun = true)
     public void setup(){
-        logger.info("Start testing: " + LocalDate.now() + " : " + LocalTime.now());
+        //logger.info("Start testing: " + LocalDate.now() + " : " + LocalTime.now());
         driver = new ChromeDriver();
 
-        WebDriverListener webDriverListener = new WDListener();
-        driver = new EventFiringDecorator<>(webDriverListener)
-                .decorate(driver);
+        //WebDriverListener webDriverListener = new WDListener();
+        //driver = new EventFiringDecorator<>(webDriverListener)
+          //      .decorate(driver);
 
         driver.manage().window().maximize();
 
