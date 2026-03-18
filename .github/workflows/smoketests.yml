@@ -28,7 +28,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build with Gradle Wrapper
-        run: .\gradlew clean smoketests
+        run: .\gradlew clean smoketests -Dfile.encoding=UTF-8
 
       - name: Upload screenshots
         if: always()
