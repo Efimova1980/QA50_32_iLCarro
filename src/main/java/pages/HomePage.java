@@ -57,10 +57,10 @@ public class HomePage extends BasePage{
     }
 
     public void clickBtnSignUp(){
-        btnSignUp.click();
+        clickWait(btnSignUp, 3);
     }
     public void clickBtnLogin(){
-        btnLogin.click();
+        clickWait(btnLogin, 3);
     }
 
     public void typeFindYourCarForm(String city, LocalDate startDate, LocalDate endDate) {

@@ -22,7 +22,6 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage(){
-        pause(1);
         new HomePage(getDriver()).clickBtnSignUp();
         registrationPage = new RegistrationPage(getDriver());
     }
