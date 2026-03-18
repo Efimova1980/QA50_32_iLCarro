@@ -35,7 +35,7 @@ public class BasePage {
         return false;
     }
 
-    public void pause(int time){
+    public static void pause(int time){
         try {
             Thread.sleep(time * 1000L);
         } catch (InterruptedException e) {

@@ -6,9 +6,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.BasePage;
 import pages.HomePage;
 import pages.PopupPage;
 import pages.RegistrationPage;
+
+import static pages.BasePage.pause;
 import static utils.UserFactory.*;
 
 import java.util.Random;
@@ -19,6 +22,7 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage(){
+        pause(1);
         new HomePage(getDriver()).clickBtnSignUp();
         registrationPage = new RegistrationPage(getDriver());
     }
