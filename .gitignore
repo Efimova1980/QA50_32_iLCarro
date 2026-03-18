@@ -18,7 +18,6 @@ out/
 !**/src/test/**/out/
 src/test/properties
 src/test/resources/test_log
-gradle.properties
 
 ### Eclipse ###
 .apt_generated
