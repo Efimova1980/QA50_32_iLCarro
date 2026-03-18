@@ -25,7 +25,7 @@ public class RegistrationTests extends AppManager {
 
     //----------------------------------POSITIVE TESTS-------------------------------------
     //in the class
-    @Test
+    @Test(groups = "smoke")
     public void registrationPositiveTest(){
         Random rand = new Random();
         String email = "henry" + rand.nextInt(1000) + "@gmail.com";
@@ -46,7 +46,7 @@ public class RegistrationTests extends AppManager {
     }
 
     //in the class
-    @Test(groups = {"smoke", "reg-regression"})
+    @Test(groups = "reg-regression")
     public void registrationPositiveTest_WithFaker(){
         User user = positiveUser();
         registrationPage.typeRegistrationForm(user);
