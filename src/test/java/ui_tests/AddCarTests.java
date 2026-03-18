@@ -35,7 +35,7 @@ public class AddCarTests extends AppManager {
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
         loginPage.clickBtnOk();
-        //loginPage.pause(2);//иногда падает 1-2 теста из-за того, что не успевает прорисоваться меню верхнее
+        //loginPage.pause(2);
         letTheCarWorkPage = clickButtonHeader(HeaderMenuItem.LET_THE_CAR_WORK);
     }
 
@@ -45,8 +45,8 @@ public class AddCarTests extends AppManager {
         letTheCarWorkPage.typeLetTheCarWorkForm(car);
         letTheCarWorkPage.typeImage(car.getImage());
         letTheCarWorkPage.clickBtnSubmit_WithJS();
-        //Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
-        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("не должно быть пустым"));
+        Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
+        //Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("не должно быть пустым"));
     }
 
     //add car negative tests

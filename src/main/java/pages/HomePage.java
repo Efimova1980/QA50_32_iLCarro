@@ -95,7 +95,7 @@ public class HomePage extends BasePage{
 //        int month = date.getMonth().getValue();
 //        typeMonth(Months.values()[month-1]);
 
-        //td[@aria-label="March 2026"] другой локатор для месяца
+        //td[@aria-label="March 2026"] //another locator for month
         StringBuilder month = new StringBuilder();
         month.append(date.getMonth().toString().substring(0,1).toUpperCase())
                 .append(date.getMonth().toString().substring(1).toLowerCase());
@@ -109,7 +109,7 @@ public class HomePage extends BasePage{
 //                .xpath("//div[text()=' " + day + " ']"));
 //        btnDay.click();
 
-        //td[@aria-label="March 18, 2026"] другой локатор для дня
+        //td[@aria-label="March 18, 2026"] //another locator for day
         StringBuilder day = new StringBuilder();
         day.append(date.getDayOfMonth());
         WebElement btnDay = driver.findElement(By

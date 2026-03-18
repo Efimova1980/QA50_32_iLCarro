@@ -32,7 +32,7 @@ public class FindYourCarTests extends AppManager {
     }
 
     //HOMEWORK10
-    //позитивный тест с календарем
+    //with calendar
     @Test
     public void findYourCarPositiveTestWithCalandar(){
         String city = "Rehovot";
