@@ -150,3 +150,4 @@ public class LoginTests extends AppManager {
     }
 
 }
+
