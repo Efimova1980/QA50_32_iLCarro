@@ -43,7 +43,7 @@ public class FindYourCarTests extends AppManager {
         Assert.assertTrue(homePage.urlContains("results",2));
     }
 
-    //демонстрация обработки исключения
+    //demo exception
     @Test(expectedExceptions =  org.openqa.selenium.TimeoutException.class)
     public void findYourCarNegativeTest_EmptyFieldCityWithException(){
         String city = "";

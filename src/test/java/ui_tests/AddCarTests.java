@@ -46,7 +46,7 @@ public class AddCarTests extends AppManager {
         letTheCarWorkPage.typeImage(car.getImage());
         letTheCarWorkPage.clickBtnSubmit_WithJS();
         Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
-        //Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("не должно быть пустым"));
+        //Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent(""));
     }
 
     //add car negative tests
