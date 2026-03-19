@@ -3,6 +3,7 @@ package ui_tests;
 import ch.qos.logback.core.joran.conditional.ThenAction;
 import dto.User;
 import manager.AppManager;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,6 +13,7 @@ import utils.enums.HeaderMenuItem;
 
 import static utils.UserFactory.*;
 
+import java.sql.Driver;
 import java.util.Random;
 
 public class RegistrationTests extends AppManager {
@@ -20,7 +22,8 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage(){
-        HomePage homePage =  new HomePage(getDriver());
+        WebDriver driver = getDriver();
+        HomePage homePage =  new HomePage(driver);
         Header header = homePage.getHeader();
         registrationPage = header.click(HeaderMenuItem.SIGN_UP);
 
