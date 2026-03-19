@@ -1,15 +1,13 @@
 package ui_tests;
 
+import ch.qos.logback.core.joran.conditional.ThenAction;
 import dto.User;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import pages.BasePage;
-import pages.HomePage;
-import pages.PopupPage;
-import pages.RegistrationPage;
+import pages.*;
 import utils.enums.HeaderMenuItem;
 
 import static utils.UserFactory.*;
@@ -22,7 +20,9 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage(){
-        registrationPage = new HomePage(getDriver()).getHeader().click(HeaderMenuItem.SIGN_UP);
+        HomePage homePage =  new HomePage(getDriver());
+        Header header = homePage.getHeader();
+        registrationPage = header.click(HeaderMenuItem.SIGN_UP);
 
         //new HomePage(getDriver()).clickBtnSignUp();
         //registrationPage = new RegistrationPage(getDriver());
