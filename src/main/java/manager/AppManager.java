@@ -21,6 +21,7 @@ public class AppManager {
 
     public WebDriver getDriver() {
         if (driver == null) {
+            logger.info("Driver is not initialized, create driver...");
             initDriver();
         }
         return driver;
@@ -35,6 +36,7 @@ public class AppManager {
 
     private void initDriver() {
         if (driver == null){
+            logger.info("Create driver...");
             WebDriverListener webDriverListener = new WDListener();
 
             ChromeOptions options = new ChromeOptions();
