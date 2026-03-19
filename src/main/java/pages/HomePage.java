@@ -17,11 +17,14 @@ import java.time.format.DateTimeFormatter;
 
 public class HomePage extends BasePage{
     public HomePage(WebDriver driver) {
-        setDriver(driver);
+        super(driver);
+        //setDriver(driver);
         //driver.get("https://ilcarro.web.app/search");
         driver.get(PropertiesReader.getProperty("base.properties", "baseUrl"));
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
+        //PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
+
+
 
     @FindBy(xpath = "//a[@ng-reflect-router-link='login']")
     WebElement btnLogin;
@@ -39,10 +42,8 @@ public class HomePage extends BasePage{
     WebElement btnChooseMonthYear;
 
 
-
-
     public void clickBtnYalla_WithWait(){
-        clickWait(btnYalla,2);
+        clickWait(btnYalla, 2);
     }
     public void clickBtnYalla(){
         btnYalla.click();
@@ -66,7 +67,7 @@ public class HomePage extends BasePage{
     public void typeFindYourCarForm(String city, LocalDate startDate, LocalDate endDate) {
         inputCity.sendKeys(city);
         setDateRange(startDate, endDate);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("document.querySelector(\"button[type='submit']\")" +
                 ".removeAttribute(\"disabled\")");
     }
@@ -79,7 +80,7 @@ public class HomePage extends BasePage{
     //CALENDAR--------------------------------------------------
 
     private void typeMonth(Months month){
-        WebElement btnMonth = driver.findElement(By.xpath(month.getLocator()));
+        WebElement btnMonth = getDriver().findElement(By.xpath(month.getLocator()));
         btnMonth.click();
     }
 
@@ -87,7 +88,7 @@ public class HomePage extends BasePage{
         btnChooseMonthYear.click();
         //td[@aria-label="2026"]
         String year = Integer.toString(date.getYear());
-        WebElement btnYear = driver.findElement(By
+        WebElement btnYear = getDriver().findElement(By
                 .xpath("//td[@aria-label='" + year + "']"));
         btnYear.click();
 
@@ -99,7 +100,7 @@ public class HomePage extends BasePage{
         StringBuilder month = new StringBuilder();
         month.append(date.getMonth().toString().substring(0,1).toUpperCase())
                 .append(date.getMonth().toString().substring(1).toLowerCase());
-        WebElement btnMonth = driver.findElement(By
+        WebElement btnMonth = getDriver().findElement(By
                 .xpath("//td[@aria-label='" + month +" "+ year + "']"));
         btnMonth.click();
 
@@ -112,7 +113,7 @@ public class HomePage extends BasePage{
         //td[@aria-label="March 18, 2026"] //another locator for day
         StringBuilder day = new StringBuilder();
         day.append(date.getDayOfMonth());
-        WebElement btnDay = driver.findElement(By
+        WebElement btnDay = getDriver().findElement(By
                 .xpath("//td[@aria-label='" + month +" " + day + ", " + year + "']"));
         btnDay.click();
     }
@@ -123,20 +124,20 @@ public class HomePage extends BasePage{
         typeCalendar(startDate);
         typeCalendar(endDate);
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("document.querySelector(\"button[type='submit']\")" +
                 ".removeAttribute(\"disabled\")");
     }
 
     public boolean isTitlePresentOnClickIconFooter(FooterMenuItem item, String title){
-        driver.findElement(By.xpath(item.getLocator())).click();
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
+        getDriver().findElement(By.xpath(item.getLocator())).click();
+        return new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.titleContains(title));
     }
 
     public boolean isTitlePresentOnClickBtnHeader(HeaderMenuItem item, String title){
-        driver.findElement(By.xpath(item.getLocator())).click();
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
+        getDriver().findElement(By.xpath(item.getLocator())).click();
+        return new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.titleContains(title));
     }
 }

@@ -66,9 +66,7 @@ public class NavigationTests extends AppManager {
 
     @BeforeMethod(onlyForGroups = "loginRequired")
     public void login() {
-
-        new HomePage(getDriver());
-        LoginPage loginPage = BasePage.clickButtonHeader(HeaderMenuItem.LOGIN);
+        LoginPage loginPage = new HomePage(getDriver()).getHeader().click(HeaderMenuItem.LOGIN);
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties","login"))
                 .password(PropertiesReader.getProperty("base.properties","password"))

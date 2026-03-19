@@ -5,6 +5,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.enums.HeaderMenuItem;
@@ -12,18 +14,67 @@ import utils.enums.HeaderMenuItem;
 import java.time.Duration;
 import java.util.List;
 
-public class BasePage {
-
-    static WebDriver driver;
+public abstract class BasePage {
 
     @FindBy(css = ".error")
     List<WebElement> listErrors;
     //    @FindBy(xpath = "//div[@class='error']")
     //    List<WebElement> listErrors;
 
-    public static void setDriver(WebDriver driver) {
-        BasePage.driver = driver;
+    private WebDriver driver; //!
+    private WebDriverWait wait; //!
+    protected Header header;
+
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); //!
+        this.header = new Header(driver);
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10),this);//!
     }
+
+    //--------------------------------getters , setters -----------------------
+    protected WebDriver getDriver() {
+        return driver;
+    }
+
+    protected WebDriverWait getWait() {
+        return wait;
+    }
+
+//    public static void setDriver(WebDriver driver) {
+//        //BasePage.driver = driver;
+//    }
+
+    public Header getHeader() {
+        return header;
+    }
+
+    //----------------------------------base actions---------------------------------------------
+    protected void click(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    protected void type(By locator, String text) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    protected void type(WebElement element, String text) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    protected static void pause(int time){
+        try {
+            Thread.sleep(time * 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
 
     public boolean isTextInErrorPresent(String text){
         if (listErrors == null || listErrors.isEmpty())
@@ -35,71 +86,31 @@ public class BasePage {
         return false;
     }
 
-    public static void pause(int time){
-        try {
-            Thread.sleep(time * 1000L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public boolean isElementDisplayed(WebElement element){
+    protected boolean isElementDisplayed(WebElement element){
         return element.isDisplayed();
     }
 
-    public boolean isTextInElementPresentWait(WebElement element, String text){
+    protected boolean isTextInElementPresentWait(WebElement element, String text){
         return new WebDriverWait(driver, Duration.ofSeconds(15))
                 .until(ExpectedConditions.textToBePresentInElement(element,text));
     }
 
-    public boolean isElementEnabled(WebElement element){
+    protected boolean isElementEnabled(WebElement element){
         return element.isEnabled();
     }
 
-    public static  <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
-        //element visible
-        WebElement button = new WebDriverWait(driver, Duration.ofSeconds(15))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(item.getLocator())));
-        //element clickable
-        new WebDriverWait(driver, Duration.ofSeconds(15))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath(item.getLocator())));
-        button.click();
-
-        switch (item){
-            case LOGIN -> {
-                return (T) new LoginPage(driver);
-            }
-            case SEARCH, LOG_OUT, DELETE_ACCAUNT -> {
-                return (T) new HomePage(driver);
-            }
-            case SIGN_UP -> {
-                return (T) new RegistrationPage(driver);
-            }
-            case TERMS_OF_USE -> {
-                return (T) new TermsOfUsePage(driver);
-            }
-            case LET_THE_CAR_WORK -> {
-                return (T) new LetTheCarWorkPage(driver);
-            }
-            default -> throw new IllegalArgumentException("Invalid parameter");
-        }
-    }
-
     public void clickWait(WebElement element, int time){
-        new  WebDriverWait(driver, Duration.ofSeconds(time))
-                .until(ExpectedConditions.elementToBeClickable(element)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
-    public boolean urlContains(String partOfUrl, int time){
+    public boolean isUrlContains(String partOfUrl, int time){
         try {
-            return new WebDriverWait(driver, Duration.ofSeconds(time))
-                    .until(ExpectedConditions.urlContains(partOfUrl));
+//            return new WebDriverWait(driver, Duration.ofSeconds(time))
+//                    .until(ExpectedConditions.urlContains(partOfUrl));
+            return wait.until(ExpectedConditions.urlContains(partOfUrl));
         }catch (TimeoutException e){
             System.err.println("Error in runtime urlContains" + e);
             return false;
         }
-
     }
-
-
 }

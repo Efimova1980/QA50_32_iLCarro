@@ -16,8 +16,6 @@ import utils.enums.HeaderMenuItem;
 
 import java.lang.reflect.Method;
 
-import static pages.BasePage.clickButtonHeader;
-
 public class AddCarTests extends AppManager {
     HomePage homePage;
     LoginPage loginPage;
@@ -26,7 +24,7 @@ public class AddCarTests extends AppManager {
     @BeforeMethod(alwaysRun = true)
     public void login(Method method) {
         homePage = new HomePage(getDriver());
-        loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
+        loginPage = homePage.getHeader().click(HeaderMenuItem.LOGIN);
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties", "login"))
                 .password(PropertiesReader.getProperty("base.properties", "password"))
@@ -36,7 +34,7 @@ public class AddCarTests extends AppManager {
         loginPage.clickBtnYalla();
         loginPage.clickBtnOk();
         //loginPage.pause(2);
-        letTheCarWorkPage = clickButtonHeader(HeaderMenuItem.LET_THE_CAR_WORK);
+        letTheCarWorkPage = loginPage.getHeader().click(HeaderMenuItem.LET_THE_CAR_WORK);
     }
 
     @Test(groups = "smoke")

@@ -9,8 +9,9 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 public class PopupPage extends BasePage{
 
     public PopupPage(WebDriver driver) {
-        setDriver(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
+        //setDriver(driver);
+        super(driver);
+        //PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
 
     @FindBy(xpath = "//mat-dialog-container//h2")

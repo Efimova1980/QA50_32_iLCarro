@@ -1,7 +1,6 @@
 package ui_tests;
 
 import manager.AppManager;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -28,7 +27,7 @@ public class FindYourCarTests extends AppManager {
         LocalDate endDate = LocalDate.of(2026,3,22);
         homePage.typeFindYourCarForm(city, startDate, endDate);
         homePage.clickBtnYalla_WithWait();
-        Assert.assertTrue(homePage.urlContains("results",2));
+        Assert.assertTrue(homePage.isUrlContains("results",2));
     }
 
     //HOMEWORK10
@@ -40,7 +39,7 @@ public class FindYourCarTests extends AppManager {
         LocalDate endDate = LocalDate.of(2026,3,22);
         homePage.typeFindYourCarFormWithCalandar(city, startDate, endDate);
         homePage.clickBtnYalla_WithWait();
-        Assert.assertTrue(homePage.urlContains("results",2));
+        Assert.assertTrue(homePage.isUrlContains("results",2));
     }
 
     //demo exception

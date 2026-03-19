@@ -12,8 +12,9 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class RegistrationPage extends BasePage{
     public RegistrationPage(WebDriver driver) {
-        setDriver(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
+        //setDriver(driver);
+        //PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
+        super(driver);
     }
 
     @FindBy(id = "name")
@@ -46,14 +47,14 @@ public class RegistrationPage extends BasePage{
 
     public void setCheckBoxAgree_WithJavascript(boolean value){
         if (checkBoxAgreeInput.isSelected() != value)
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkBoxAgreeInput);
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", checkBoxAgreeInput);
     }
 
     public void setCheckBoxAgree_WithActions(boolean value){
         int x = checkBoxAgreeLabel.getSize().width;
 
         if (checkBoxAgreeInput.isSelected() != value)
-            new Actions(driver)
+            new Actions(getDriver())
                     .moveToElement(checkBoxAgreeLabel, -x/2 , 0)
                     .click()
                     .perform();

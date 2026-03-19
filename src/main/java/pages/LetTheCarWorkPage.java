@@ -17,8 +17,9 @@ import java.time.Duration;
 
 public class LetTheCarWorkPage extends BasePage {
     public LetTheCarWorkPage(WebDriver driver) {
-        setDriver(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver,15), this);
+        //setDriver(driver);
+        super(driver);
+        //PageFactory.initElements(new AjaxElementLocatorFactory(driver,15), this);
     }
 
     @FindBy(id = "pickUpPlace")
@@ -64,7 +65,7 @@ public class LetTheCarWorkPage extends BasePage {
 
 
     private void typeCity_WithJS(String city) {
-        ((JavascriptExecutor) driver).executeScript(
+        ((JavascriptExecutor) getDriver()).executeScript(
                 "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input'));",
                 inputLocation, city
         );
@@ -87,7 +88,7 @@ public class LetTheCarWorkPage extends BasePage {
     }
 
     public void clickBtnSubmit_WithJS(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("document.querySelector(\"button[type='submit']\")" +
                 ".removeAttribute(\"disabled\")");
         btnSubmit.click();
@@ -95,7 +96,7 @@ public class LetTheCarWorkPage extends BasePage {
 
     private void typeFuel(Fuel fuel){
         selectFuel.click();
-        WebElement element = driver.findElement(By.xpath(fuel.getLocator()));
+        WebElement element = getDriver().findElement(By.xpath(fuel.getLocator()));
         element.click();
     }
 

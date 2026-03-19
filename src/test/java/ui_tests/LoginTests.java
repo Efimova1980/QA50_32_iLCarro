@@ -10,6 +10,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.PopupPage;
 import utils.PropertiesReader;
+import utils.enums.HeaderMenuItem;
 
 import java.lang.reflect.Method;
 
@@ -22,8 +23,7 @@ public class LoginTests extends AppManager {
 
     @BeforeMethod(alwaysRun = true)
     public void goToLoginPage(){
-        new HomePage(getDriver()).clickBtnLogin();
-        loginPage = new LoginPage(getDriver());
+        loginPage = new HomePage(getDriver()).getHeader().click(HeaderMenuItem.LOGIN);
     }
 
     //------------------LOGIN POSITIVE TESTS----------------------------
@@ -79,8 +79,6 @@ public class LoginTests extends AppManager {
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "validate field password");
         softAssert.assertAll();
     }
-
-
 
     //------------------------HOMEWORK 7 LOGIN NEGATIVE TESTS-------------------------------------------
     @Test
