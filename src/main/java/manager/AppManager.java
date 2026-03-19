@@ -20,25 +20,32 @@ public class AppManager {
     public final static Logger logger = LoggerFactory.getLogger(AppManager.class);
 
     public WebDriver getDriver() {
+        if (driver == null) {
+            initDriver();
+        }
         return driver;
     }
 
     @BeforeClass(alwaysRun = true)
     public void setup(){
         logger.info("Start testing: " + LocalDate.now() + " : " + LocalTime.now());
-        WebDriverListener webDriverListener = new WDListener();
+        initDriver();
 
+    }
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
+    private void initDriver() {
+        if (driver == null){
+            WebDriverListener webDriverListener = new WDListener();
 
-        driver = new ChromeDriver();
-        driver = new EventFiringDecorator<>(webDriverListener)
-                .decorate(driver);
-        driver.manage().window().maximize();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
 
+            driver = new ChromeDriver();
+            driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
+            driver.manage().window().maximize();
+        }
     }
 
     @AfterMethod(enabled = true,alwaysRun = true)
