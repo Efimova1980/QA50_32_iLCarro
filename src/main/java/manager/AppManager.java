@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import utils.WDListener;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -47,6 +48,8 @@ public class AppManager {
             driver = new ChromeDriver();
             driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
             driver.manage().window().maximize();
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+
         }
     }
 
