@@ -10,7 +10,9 @@ import pages.BasePage;
 import pages.HomePage;
 import pages.PopupPage;
 import pages.RegistrationPage;
+import utils.enums.HeaderMenuItem;
 
+import static pages.BasePage.clickButtonHeader;
 import static pages.BasePage.pause;
 import static utils.UserFactory.*;
 
@@ -22,8 +24,10 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage(){
-        new HomePage(getDriver()).clickBtnSignUp();
-        registrationPage = new RegistrationPage(getDriver());
+        new HomePage(getDriver());
+        registrationPage = clickButtonHeader(HeaderMenuItem.SIGN_UP);
+        //new HomePage(getDriver()).clickBtnSignUp();
+        //registrationPage = new RegistrationPage(getDriver());
     }
 
     //----------------------------------POSITIVE TESTS-------------------------------------
