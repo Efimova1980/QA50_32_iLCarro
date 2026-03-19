@@ -7,6 +7,7 @@ import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import utils.WDListener;
 
@@ -21,15 +22,15 @@ public class AppManager {
         return driver;
     }
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setup(){
         logger.info("Start testing: " + LocalDate.now() + " : " + LocalTime.now());
-        driver = new ChromeDriver();
-
         WebDriverListener webDriverListener = new WDListener();
+
+
+        driver = new ChromeDriver();
         driver = new EventFiringDecorator<>(webDriverListener)
                 .decorate(driver);
-
         driver.manage().window().maximize();
 
     }
