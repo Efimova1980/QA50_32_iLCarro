@@ -36,11 +36,10 @@ public class HomePage extends BasePage{
     WebElement inputDates;
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
-
-    By btnYalla_locator = By.xpath("//button[@type='submit']");
-
     @FindBy(xpath= "//button[@aria-label='Choose month and year']")
     WebElement btnChooseMonthYear;
+
+    By btnYalla_locator = By.xpath("//button[@type='submit']");
 
 
     public void clickBtnYalla_WithWait(){
@@ -57,13 +56,6 @@ public class HomePage extends BasePage{
                 + " - "
                 + endDate.format(formatter);
         inputDates.sendKeys(dateRange);
-    }
-
-    public void clickBtnSignUp(){
-        clickWait(btnSignUp, 3);
-    }
-    public void clickBtnLogin(){
-        clickWait(btnLogin, 3);
     }
 
     public void typeFindYourCarForm(String city, LocalDate startDate, LocalDate endDate) {

@@ -18,20 +18,17 @@ public class LoginPage extends BasePage{
 
     @FindBy(xpath = "//input[@id='email']")
     WebElement inputEmail;
-
     @FindBy(xpath = "//input[@id='password']")
     WebElement inputPassword;
-
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
+    @FindBy(xpath = "//h2[@class='message']")
+    WebElement popupSuccessfullLogin;
+    @FindBy(xpath = "//button[@class='positive-button ng-star-inserted']")
+    WebElement btnOk;
 
     By btnYalla_locator = By.xpath("//button[@type='submit']");
 
-    @FindBy(xpath = "//h2[text()='Logged in success']")
-    WebElement popupSuccessfullLogin;
-
-    @FindBy(xpath = "//button[text()='Ok']")
-    WebElement btnOk;
 
     public void clickBtnOk(){
         clickWait(btnOk,2);

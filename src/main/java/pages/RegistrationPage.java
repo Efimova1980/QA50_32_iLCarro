@@ -16,29 +16,23 @@ public class RegistrationPage extends BasePage{
 
     @FindBy(id = "name")
     WebElement inputName;
-
     @FindBy(id = "lastName")
     WebElement inputLastName;
-
     @FindBy(id = "email")
     WebElement inputEmail;
-
     @FindBy(id = "password")
     WebElement inputPassword;
-
     @FindBy(id="terms-of-use")
     WebElement checkBoxAgreeInput;
-
     @FindBy(xpath="//label[@for='terms-of-use']")
     WebElement checkBoxAgreeLabel;
-
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
+    @FindBy(xpath = "//h2[text()='You are logged in success']")
+    WebElement popupRegistred;
 
     By btnYalla_locator = By.xpath("//button[@type='submit']");
 
-    @FindBy(xpath = "//h2[text()='You are logged in success']")
-    WebElement popupRegistred;
 
     public void clickYalla(){
         click(btnYalla_locator);

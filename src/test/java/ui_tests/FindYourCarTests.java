@@ -26,7 +26,8 @@ public class FindYourCarTests extends AppManager {
         LocalDate startDate = LocalDate.of(2026,3,12);
         LocalDate endDate = LocalDate.of(2026,3,22);
         homePage.typeFindYourCarForm(city, startDate, endDate);
-        homePage.clickBtnYalla_WithWait();
+        //homePage.clickBtnYalla_WithWait();
+        homePage.clickBtnYalla();
         Assert.assertTrue(homePage.isUrlContains("results",2));
     }
 
