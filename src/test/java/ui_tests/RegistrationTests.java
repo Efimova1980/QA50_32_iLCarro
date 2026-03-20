@@ -33,7 +33,7 @@ public class RegistrationTests extends AppManager {
 
     //----------------------------------POSITIVE TESTS-------------------------------------
     //in the class
-    @Test(groups = "smoke")
+    @Test(groups = {"smoke", "test_workflow"})
     public void registrationPositiveTest(){
         Random rand = new Random();
         String email = "henry" + rand.nextInt(1000) + "@gmail.com";
