@@ -32,7 +32,7 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath="//label[@for='terms-of-use']")
     WebElement checkBoxAgreeLabel;
 
-    @FindBy(xpath = "//button[text()='Y’alla!']")
+    @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
 
     By btnYalla_locator = By.xpath("//button[text()='Y’alla!']");
@@ -41,7 +41,6 @@ public class RegistrationPage extends BasePage{
     WebElement popupRegistred;
 
     public void clickYalla(){
-        //btnYalla.click();
         click(btnYalla_locator);
     }
 
