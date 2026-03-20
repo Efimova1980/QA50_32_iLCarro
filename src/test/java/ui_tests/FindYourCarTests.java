@@ -23,8 +23,8 @@ public class FindYourCarTests extends AppManager {
     @Test(groups = "smoke")
     public void findYourCarPositiveTest(){
         String city = "Rehovot";
-        LocalDate startDate = LocalDate.of(2026,3,12);
-        LocalDate endDate = LocalDate.of(2026,3,22);
+        LocalDate startDate = LocalDate.of(2026,12,12);
+        LocalDate endDate = LocalDate.of(2026,12,22);
         homePage.typeFindYourCarForm(city, startDate, endDate);
         //homePage.clickBtnYalla_WithWait();
         homePage.clickBtnYalla();

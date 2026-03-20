@@ -37,7 +37,6 @@ public class AddCarTests extends AppManager {
                 .password(PropertiesReader.getProperty("base.properties", "password"))
                 .build();
         */
-
         User user = User.builder()
                 .username("harry@gmail.com")
                 .password("Pass1234!")
@@ -55,7 +54,7 @@ public class AddCarTests extends AppManager {
     public void AddNewCarPositiveTest(){
         Car car = CarFactory.positiveCar();
         letTheCarWorkPage.typeLetTheCarWorkForm(car);
-        letTheCarWorkPage.typeImage(car.getImage());
+        //letTheCarWorkPage.typeImage(car.getImage());
         letTheCarWorkPage.clickBtnSubmit_WithJS();
         //Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
         Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("must not be blank"));

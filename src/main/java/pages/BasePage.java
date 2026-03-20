@@ -73,12 +73,6 @@ public abstract class BasePage {
         }
     }
 
-    protected void type(WebElement element, String text) {
-        wait.until(ExpectedConditions.visibilityOf(element));
-        element.clear();
-        element.sendKeys(text);
-    }
-
     protected static void pause(int time){
         try {
             Thread.sleep(time * 1000L);
