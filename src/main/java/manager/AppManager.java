@@ -40,10 +40,10 @@ public class AppManager {
             logger.info("Create driver...");
             WebDriverListener webDriverListener = new WDListener();
 
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless=new");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
+//            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--headless=new");
+//            options.addArguments("--no-sandbox");
+//            options.addArguments("--disable-dev-shm-usage");
 
             driver = new ChromeDriver();
             driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
