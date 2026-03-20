@@ -53,12 +53,11 @@ public abstract class BasePage {
 
     //----------------------------------base actions---------------------------------------------
     protected void click(By locator) {
-        //wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
-        WebElement element = wait.until(d -> {
-            WebElement el = d.findElement(locator);
-            return (el.isDisplayed() && el.isEnabled()) ? el : null;
-        });
-
+        // 1. is element exist
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        // 2. is element clickable
+        element = wait.until(ExpectedConditions.elementToBeClickable(element));
+        // 3. Scroll to element
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().perform();
     }
