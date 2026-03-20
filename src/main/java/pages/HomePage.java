@@ -36,6 +36,9 @@ public class HomePage extends BasePage{
     WebElement inputDates;
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
+
+    By btnYalla_locator = By.xpath("//button[@type='submit']");
+
     @FindBy(xpath= "//button[@aria-label='Choose month and year']")
     WebElement btnChooseMonthYear;
 
@@ -44,7 +47,8 @@ public class HomePage extends BasePage{
         clickWait(btnYalla, 2);
     }
     public void clickBtnYalla(){
-        btnYalla.click();
+        //btnYalla.click();
+        click(btnYalla_locator);
     }
 
     public void setDateRange(LocalDate startDate, LocalDate endDate) {

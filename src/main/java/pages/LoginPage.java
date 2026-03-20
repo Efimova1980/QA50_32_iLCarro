@@ -1,6 +1,7 @@
 package pages;
 
 import dto.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,10 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//input[@id='password']")
     WebElement inputPassword;
 
-    @FindBy(xpath = "//button[text()='Y’alla!']")
+    @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
+
+    By btnYalla_locator = By.xpath("//button[@type='submit']");
 
     @FindBy(xpath = "//h2[text()='Logged in success']")
     WebElement popupSuccessfullLogin;
@@ -35,7 +38,7 @@ public class LoginPage extends BasePage{
     }
 
     public void clickBtnYalla(){
-        btnYalla.click();
+        click(btnYalla_locator);
     }
 
     public boolean isBtnYallaEnabled(){
