@@ -15,6 +15,8 @@ import utils.enums.HeaderMenuItem;
 import java.time.Duration;
 import java.util.List;
 
+import static manager.AppManager.logger;
+
 public abstract class BasePage {
 
     @FindBy(css = ".error")
@@ -53,6 +55,7 @@ public abstract class BasePage {
 
     //----------------------------------base actions---------------------------------------------
     protected void click(By locator) {
+        logger.info("waiting for element with locator" + locator.toString());
         // 1. is element exist
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         // 2. is element clickable

@@ -35,7 +35,7 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
 
-    By btnYalla_locator = By.xpath("//button[text()='Y’alla!']");
+    By btnYalla_locator = By.xpath("//button[@type='submit']");
 
     @FindBy(xpath = "//h2[text()='You are logged in success']")
     WebElement popupRegistred;
