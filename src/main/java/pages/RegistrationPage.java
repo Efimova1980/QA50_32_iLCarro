@@ -1,10 +1,7 @@
 package pages;
 
 import dto.User;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -38,11 +35,14 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath = "//button[text()='Y’alla!']")
     WebElement btnYalla;
 
+    By btnYalla_locator = By.xpath("//button[text()='Y’alla!']");
+
     @FindBy(xpath = "//h2[text()='You are logged in success']")
     WebElement popupRegistred;
 
     public void clickYalla(){
-        btnYalla.click();
+        //btnYalla.click();
+        click(btnYalla_locator);
     }
 
     public void setCheckBoxAgree_WithJavascript(boolean value){
