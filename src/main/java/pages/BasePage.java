@@ -65,10 +65,12 @@ public abstract class BasePage {
         actions.moveToElement(element).click().perform();
     }
 
-    protected void type(By locator, String text) {
+    protected void type(By locator, CharSequence... charSequence) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         element.clear();
-        element.sendKeys(text);
+        for (CharSequence cs : charSequence) {
+            element.sendKeys(cs);
+        }
     }
 
     protected void type(WebElement element, String text) {
