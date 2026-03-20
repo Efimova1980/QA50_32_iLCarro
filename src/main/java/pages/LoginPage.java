@@ -28,10 +28,11 @@ public class LoginPage extends BasePage{
     WebElement btnOk;
 
     By btnYalla_locator = By.xpath("//button[@type='submit']");
-
+    By btnOk_locator = By.xpath("//button[@class='positive-button ng-star-inserted']");
 
     public void clickBtnOk(){
-        clickWait(btnOk,2);
+        //clickWait(btnOk,2);
+        click(btnOk_locator);
     }
 
     public void clickBtnYalla(){
