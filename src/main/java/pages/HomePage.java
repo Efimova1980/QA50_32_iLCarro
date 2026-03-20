@@ -19,8 +19,8 @@ public class HomePage extends BasePage{
     public HomePage(WebDriver driver) {
         super(driver);
         //setDriver(driver);
-        //driver.get("https://ilcarro.web.app/search");
-        driver.get(PropertiesReader.getProperty("base.properties", "baseUrl"));
+        driver.get("https://ilcarro.web.app/search");
+        //driver.get(PropertiesReader.getProperty("base.properties", "baseUrl"));
         //PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
 
