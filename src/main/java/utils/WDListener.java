@@ -76,4 +76,9 @@ public class WDListener implements WebDriverListener {
         logger.info("After maximize: {}", window.getSize());
     }
 
+    @Override
+    public void beforeFindElements(WebDriver driver, By locator) {
+        WebDriverListener.super.beforeFindElements(driver, locator);
+        logger.info("Finding element with locator -->{}", locator.toString());
+    }
 }
