@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -52,7 +53,14 @@ public abstract class BasePage {
 
     //----------------------------------base actions---------------------------------------------
     protected void click(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        //wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        WebElement element = wait.until(d -> {
+            WebElement el = d.findElement(locator);
+            return (el.isDisplayed() && el.isEnabled()) ? el : null;
+        });
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().perform();
     }
 
     protected void type(By locator, String text) {
