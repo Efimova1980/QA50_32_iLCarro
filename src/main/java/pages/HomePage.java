@@ -24,8 +24,6 @@ public class HomePage extends BasePage{
         //PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
 
-
-
     @FindBy(xpath = "//a[@ng-reflect-router-link='login']")
     WebElement btnLogin;
     @FindBy(xpath = "//a[@ng-reflect-router-link='logout']")
