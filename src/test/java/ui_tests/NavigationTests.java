@@ -4,13 +4,17 @@ import dto.User;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.PropertiesReader;
+import utils.TestNGListener;
 import utils.enums.FooterMenuItem;
 import utils.enums.HeaderMenuItem;
+
+@Listeners(TestNGListener.class)
 
 public class NavigationTests extends AppManager {
 

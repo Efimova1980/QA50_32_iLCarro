@@ -5,16 +5,20 @@ import dto.User;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LetTheCarWorkPage;
 import pages.LoginPage;
-import pages.PopupPage;
 import utils.CarFactory;
 import utils.PropertiesReader;
+import utils.TestNGListener;
 import utils.enums.HeaderMenuItem;
 
 import java.lang.reflect.Method;
+
+@Listeners(TestNGListener.class)
+
 
 public class AddCarTests extends AppManager {
     HomePage homePage;

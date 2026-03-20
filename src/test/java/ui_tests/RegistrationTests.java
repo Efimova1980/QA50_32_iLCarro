@@ -1,20 +1,19 @@
 package ui_tests;
-
-import ch.qos.logback.core.joran.conditional.ThenAction;
 import dto.User;
 import manager.AppManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.*;
+import utils.TestNGListener;
 import utils.enums.HeaderMenuItem;
-
 import static utils.UserFactory.*;
-
-import java.sql.Driver;
 import java.util.Random;
+
+@Listeners(TestNGListener.class)
 
 public class RegistrationTests extends AppManager {
     RegistrationPage registrationPage;

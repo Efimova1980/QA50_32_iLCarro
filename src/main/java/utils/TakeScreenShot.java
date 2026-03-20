@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static manager.AppManager.logger;
+
 public class TakeScreenShot {
     public static void main(String[] args) {
         System.out.println(createFileName());
@@ -23,6 +25,7 @@ public class TakeScreenShot {
                 dir.mkdirs();
             }
             Files.copy(scrFile.toPath(), new File(fileName).toPath());
+            logger.info("Screenshot saved to: " + fileName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

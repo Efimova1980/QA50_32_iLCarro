@@ -4,18 +4,21 @@ import dto.User;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopupPage;
 import utils.PropertiesReader;
+import utils.TestNGListener;
 import utils.enums.HeaderMenuItem;
 
 import java.lang.reflect.Method;
 
 import static utils.UserFactory.emptyUser;
 import static utils.UserFactory.positiveUser;
+@Listeners(TestNGListener.class)
 
 public class LoginTests extends AppManager {
     LoginPage loginPage;
