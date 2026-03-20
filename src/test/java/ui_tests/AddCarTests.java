@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LetTheCarWorkPage;
 import pages.LoginPage;
+import pages.PopupPage;
 import utils.CarFactory;
 import utils.PropertiesReader; //for local tests
 import utils.TestNGListener;
@@ -56,8 +57,8 @@ public class AddCarTests extends AppManager {
         letTheCarWorkPage.typeLetTheCarWorkForm(car);
         letTheCarWorkPage.typeImage(car.getImage());
         letTheCarWorkPage.clickBtnSubmit_WithJS();
-        Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
-        //Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent(""));
+        //Assert.assertTrue(letTheCarWorkPage.isButtonSubmitEnabled());
+        Assert.assertTrue(new PopupPage(getDriver()).isTextInPopupMessagePresent("must not be blank"));
     }
 
     //add car negative tests
