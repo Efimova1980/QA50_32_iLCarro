@@ -30,10 +30,10 @@ public class AppManager {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--lang=en");
-        options.addArguments("--headless=new");       //
-        options.addArguments("--window-size=1920,1080"); //
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
+        //options.addArguments("--headless=new");       //
+        //options.addArguments("--window-size=1920,1080"); //
+        //options.addArguments("--no-sandbox");
+        //options.addArguments("--disable-dev-shm-usage");
 
         driver = new ChromeDriver(options);
         driver = new EventFiringDecorator<>(webDriverListener)
