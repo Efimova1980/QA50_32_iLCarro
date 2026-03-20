@@ -32,10 +32,17 @@ public class LoginTests extends AppManager {
     //------------------LOGIN POSITIVE TESTS----------------------------
     @Test
     public void loginPositiveTest(Method method){
+        /*
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties","login"))
                 .password(PropertiesReader.getProperty("base.properties","password"))
                 .build();
+        */
+        User user = User.builder()
+                .username("harry@gmail.com")
+                .password("Pass1234!")
+                .build();
+
         logger.info("start test " + method.getName() + " with " + user);
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();

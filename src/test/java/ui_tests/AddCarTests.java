@@ -11,7 +11,7 @@ import pages.HomePage;
 import pages.LetTheCarWorkPage;
 import pages.LoginPage;
 import utils.CarFactory;
-import utils.PropertiesReader;
+import utils.PropertiesReader; //for local tests
 import utils.TestNGListener;
 import utils.enums.HeaderMenuItem;
 
@@ -29,10 +29,19 @@ public class AddCarTests extends AppManager {
     public void login(Method method) {
         homePage = new HomePage(getDriver());
         loginPage = homePage.getHeader().click(HeaderMenuItem.LOGIN);
+        /*
+        //FOR LOCAL TESTS NOT GITHUB REMOTE TESTS
         User user = User.builder()
                 .username(PropertiesReader.getProperty("base.properties", "login"))
                 .password(PropertiesReader.getProperty("base.properties", "password"))
                 .build();
+        */
+
+        User user = User.builder()
+                .username("harry@gmail.com")
+                .password("Pass1234!")
+                .build();
+
         logger.info("start test " + method.getName() + " with " + user);
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
