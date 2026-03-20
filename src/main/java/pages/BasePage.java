@@ -28,9 +28,9 @@ public abstract class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); //!
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20)); //!
         this.header = new Header(driver);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10),this);//!
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 20),this);//!
     }
 
     //--------------------------------getters , setters -----------------------
