@@ -39,7 +39,7 @@ public class FindYourCarTests extends AppManager {
         LocalDate startDate = LocalDate.of(2026,3,12);
         LocalDate endDate = LocalDate.of(2026,3,22);
         homePage.typeFindYourCarFormWithCalandar(city, startDate, endDate);
-        homePage.clickBtnYalla_WithWait();
+        homePage.clickBtnYalla();
         Assert.assertTrue(homePage.isUrlContains("results",2));
     }
 
@@ -47,10 +47,10 @@ public class FindYourCarTests extends AppManager {
     @Test(expectedExceptions =  org.openqa.selenium.TimeoutException.class)
     public void findYourCarNegativeTest_EmptyFieldCityWithException(){
         String city = "";
-        LocalDate startDate = LocalDate.of(2026,3,12);
-        LocalDate endDate = LocalDate.of(2026,3,22);
+        LocalDate startDate = LocalDate.of(2026,12,12);
+        LocalDate endDate = LocalDate.of(2026,12,22);
         homePage.typeFindYourCarForm_WOJavascript(city, startDate, endDate);
-        homePage.clickBtnYalla_WithWait();
+        homePage.clickBtnYalla();
     }
 
     @Test()

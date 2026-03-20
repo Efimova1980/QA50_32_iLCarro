@@ -40,8 +40,8 @@ public class HomePage extends BasePage{
 //    WebElement btnChooseMonthYear;
 
     By btnYalla_locator = By.xpath("//button[@type='submit']");
-    By inputDates_locator = By.xpath("input[@id='dates']");
-    By inputCity_locator = By.xpath("input[@id='city']");
+    By inputDates_locator = By.xpath("//input[@id='dates']");
+    By inputCity_locator = By.xpath("//input[@id='city']");
     By btnChooseMonthYear_locator = By.xpath("//button[@aria-label='Choose month and year']");
 
 
