@@ -55,7 +55,7 @@ public abstract class BasePage {
 
     //----------------------------------base actions---------------------------------------------
     protected void click(By locator) {
-        logger.info("waiting for element with locator" + locator.toString());
+        logger.info("clicking on element" + locator.toString());
         // 1. is element exist
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         // 2. is element clickable
@@ -97,22 +97,19 @@ public abstract class BasePage {
     }
 
     protected boolean isTextInElementPresentWait(WebElement element, String text){
-        return new WebDriverWait(driver, Duration.ofSeconds(15))
-                .until(ExpectedConditions.textToBePresentInElement(element,text));
+        return wait.until(ExpectedConditions.textToBePresentInElement(element,text));
     }
 
     protected boolean isElementEnabled(WebElement element){
         return element.isEnabled();
     }
 
-    public void clickWait(WebElement element, int time){
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-    }
+//    public void clickWait(WebElement element, int time){
+//        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+//    }
 
     public boolean isUrlContains(String partOfUrl, int time){
         try {
-//            return new WebDriverWait(driver, Duration.ofSeconds(time))
-//                    .until(ExpectedConditions.urlContains(partOfUrl));
             return wait.until(ExpectedConditions.urlContains(partOfUrl));
         }catch (TimeoutException e){
             System.err.println("Error in runtime urlContains" + e);

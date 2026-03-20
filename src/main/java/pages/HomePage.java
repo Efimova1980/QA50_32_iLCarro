@@ -24,29 +24,31 @@ public class HomePage extends BasePage{
         //PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
 
-    @FindBy(xpath = "//a[@ng-reflect-router-link='login']")
-    WebElement btnLogin;
-    @FindBy(xpath = "//a[@ng-reflect-router-link='logout']")
-    WebElement btnLogout;
-    @FindBy(xpath = "//a[@ng-reflect-router-link='registration']")
-    WebElement btnSignUp;
-    @FindBy(id="city")
-    WebElement inputCity;
-    @FindBy(id="dates")
-    WebElement inputDates;
-    @FindBy(xpath = "//button[@type='submit']")
-    WebElement btnYalla;
-    @FindBy(xpath= "//button[@aria-label='Choose month and year']")
-    WebElement btnChooseMonthYear;
+//    @FindBy(xpath = "//a[@ng-reflect-router-link='login']")
+//    WebElement btnLogin;
+//    @FindBy(xpath = "//a[@ng-reflect-router-link='logout']")
+//    WebElement btnLogout;
+//    @FindBy(xpath = "//a[@ng-reflect-router-link='registration']")
+//    WebElement btnSignUp;
+//    @FindBy(id="city")
+//    WebElement inputCity;
+//    @FindBy(id="dates")
+//    WebElement inputDates;
+//    @FindBy(xpath = "//button[@type='submit']")
+//    WebElement btnYalla;
+//    @FindBy(xpath= "//button[@aria-label='Choose month and year']")
+//    WebElement btnChooseMonthYear;
 
     By btnYalla_locator = By.xpath("//button[@type='submit']");
+    By inputDates_locator = By.xpath("input[@id='dates']");
+    By inputCity_locator = By.xpath("input[@id='city']");
+    By btnChooseMonthYear_locator = By.xpath("//button[@aria-label='Choose month and year']");
 
 
-    public void clickBtnYalla_WithWait(){
-        clickWait(btnYalla, 2);
-    }
+//    public void clickBtnYalla_WithWait(){
+//        clickWait(btnYalla, 2);
+//    }
     public void clickBtnYalla(){
-        //btnYalla.click();
         click(btnYalla_locator);
     }
 
@@ -55,11 +57,11 @@ public class HomePage extends BasePage{
         String dateRange = startDate.format(formatter)
                 + " - "
                 + endDate.format(formatter);
-        inputDates.sendKeys(dateRange);
+        type(inputDates_locator, dateRange);
     }
 
     public void typeFindYourCarForm(String city, LocalDate startDate, LocalDate endDate) {
-        inputCity.sendKeys(city);
+        type(inputCity_locator, city);
         setDateRange(startDate, endDate);
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("document.querySelector(\"button[type='submit']\")" +
@@ -67,7 +69,7 @@ public class HomePage extends BasePage{
     }
 
     public void typeFindYourCarForm_WOJavascript(String city, LocalDate startDate, LocalDate endDate) {
-        inputCity.sendKeys(city);
+        type(inputCity_locator, city);
         setDateRange(startDate, endDate);
     }
 
@@ -79,7 +81,7 @@ public class HomePage extends BasePage{
     }
 
     private void typeCalendar(LocalDate date){
-        btnChooseMonthYear.click();
+        click(btnChooseMonthYear_locator);
         //td[@aria-label="2026"]
         String year = Integer.toString(date.getYear());
         WebElement btnYear = getDriver().findElement(By
@@ -113,8 +115,8 @@ public class HomePage extends BasePage{
     }
 
     public void typeFindYourCarFormWithCalandar(String city, LocalDate startDate, LocalDate endDate){
-        inputCity.sendKeys(city);
-        inputDates.click();
+        type(inputCity_locator, city);
+        click(inputDates_locator);
         typeCalendar(startDate);
         typeCalendar(endDate);
 

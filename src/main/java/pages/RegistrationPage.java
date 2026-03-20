@@ -67,10 +67,6 @@ public class RegistrationPage extends BasePage{
         inputPassword.sendKeys(Keys.TAB);
     }
 
-    public boolean isRegisteredDisplayed(){
-        return isElementDisplayed(popupRegistred);
-    }
-
     public boolean isBtnYallaEnabled(){
         return isElementEnabled(btnYalla);
     }
