@@ -3,6 +3,7 @@ package manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.Logger;
@@ -11,44 +12,63 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.WDListener;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class AppManager {
     private WebDriver driver;
-    public final static Logger logger = LoggerFactory.getLogger(AppManager.class);
+
+    public static final Logger logger =
+            LoggerFactory.getLogger(AppManager.class);
 
     public WebDriver getDriver() {
         return driver;
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void setup(){
-        logger.info("Start testing: " + LocalDate.now() + " : " + LocalTime.now());
+    public void setup() throws MalformedURLException {
+        logger.info(
+                "Start testing: " + LocalDate.now() + " : " + LocalTime.now()
+        );
+
         WebDriverListener webDriverListener = new WDListener();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--lang=en");
-        //options.addArguments("--headless=new");       //
-        //options.addArguments("--window-size=1920,1080"); //
-        //options.addArguments("--no-sandbox");
-        //options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
 
-        driver = new ChromeDriver(options);
+        String seleniumRemoteUrl =
+                System.getenv("SELENIUM_REMOTE_URL");
+
+        if (seleniumRemoteUrl == null || seleniumRemoteUrl.isBlank()) {
+            driver = new ChromeDriver(options);
+        } else {
+            driver = new RemoteWebDriver(
+                    new URL(seleniumRemoteUrl),
+                    options
+            );
+        }
+
         driver = new EventFiringDecorator<>(webDriverListener)
                 .decorate(driver);
+
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage()
+                .timeouts()
+                .pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-    @AfterMethod(enabled = true,alwaysRun = true)
-    public void tearDown(){
-        logger.info("Stop testing: " + LocalDate.now() + " : " + LocalTime.now());
-        if (driver != null)
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        logger.info(
+                "Stop testing: " + LocalDate.now() + " : " + LocalTime.now()
+        );
+
+        if (driver != null) {
             driver.quit();
+        }
     }
-
 }
-
-
