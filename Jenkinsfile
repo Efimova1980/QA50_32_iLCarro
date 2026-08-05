@@ -14,9 +14,9 @@ pipeline {
             }
         }
 
-        stage('Tests') {
+        stage('Smoke Tests') {
             steps {
-                sh './gradlew clean test --no-daemon --stacktrace'
+                sh './gradlew clean smoketests --no-daemon --stacktrace'
             }
         }
     }
@@ -24,7 +24,7 @@ pipeline {
     post {
         always {
             junit allowEmptyResults: true,
-                  testResults: 'build/test-results/test/*.xml'
+                  testResults: 'build/test-results/smoketests/*.xml'
         }
     }
 }
