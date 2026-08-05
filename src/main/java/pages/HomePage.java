@@ -2,9 +2,6 @@ package pages;
 
 import enums.Months;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertiesReader;
@@ -15,40 +12,19 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
         super(driver);
-        //setDriver(driver);
         driver.get("https://ilcarro.web.app/search");
         //driver.get(PropertiesReader.getProperty("base.properties", "baseUrl"));
-        //PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
-
-//    @FindBy(xpath = "//a[@ng-reflect-router-link='login']")
-//    WebElement btnLogin;
-//    @FindBy(xpath = "//a[@ng-reflect-router-link='logout']")
-//    WebElement btnLogout;
-//    @FindBy(xpath = "//a[@ng-reflect-router-link='registration']")
-//    WebElement btnSignUp;
-//    @FindBy(id="city")
-//    WebElement inputCity;
-//    @FindBy(id="dates")
-//    WebElement inputDates;
-//    @FindBy(xpath = "//button[@type='submit']")
-//    WebElement btnYalla;
-//    @FindBy(xpath= "//button[@aria-label='Choose month and year']")
-//    WebElement btnChooseMonthYear;
 
     By btnYalla_locator = By.xpath("//button[@type='submit']");
     By inputDates_locator = By.xpath("//input[@id='dates']");
     By inputCity_locator = By.xpath("//input[@id='city']");
     By btnChooseMonthYear_locator = By.xpath("//button[@aria-label='Choose month and year']");
 
-
-//    public void clickBtnYalla_WithWait(){
-//        clickWait(btnYalla, 2);
-//    }
-    public void clickBtnYalla(){
+    public void clickBtnYalla() {
         click(btnYalla_locator);
     }
 
@@ -75,12 +51,12 @@ public class HomePage extends BasePage{
 
     //CALENDAR--------------------------------------------------
 
-    private void typeMonth(Months month){
+    private void typeMonth(Months month) {
         WebElement btnMonth = getDriver().findElement(By.xpath(month.getLocator()));
         btnMonth.click();
     }
 
-    private void typeCalendar(LocalDate date){
+    private void typeCalendar(LocalDate date) {
         click(btnChooseMonthYear_locator);
         //td[@aria-label="2026"]
         String year = Integer.toString(date.getYear());
@@ -94,10 +70,10 @@ public class HomePage extends BasePage{
 
         //td[@aria-label="March 2026"] //another locator for month
         StringBuilder month = new StringBuilder();
-        month.append(date.getMonth().toString().substring(0,1).toUpperCase())
+        month.append(date.getMonth().toString().substring(0, 1).toUpperCase())
                 .append(date.getMonth().toString().substring(1).toLowerCase());
         WebElement btnMonth = getDriver().findElement(By
-                .xpath("//td[@aria-label='" + month +" "+ year + "']"));
+                .xpath("//td[@aria-label='" + month + " " + year + "']"));
         btnMonth.click();
 
         //div[text()=' 1 ']
@@ -110,11 +86,11 @@ public class HomePage extends BasePage{
         StringBuilder day = new StringBuilder();
         day.append(date.getDayOfMonth());
         WebElement btnDay = getDriver().findElement(By
-                .xpath("//td[@aria-label='" + month +" " + day + ", " + year + "']"));
+                .xpath("//td[@aria-label='" + month + " " + day + ", " + year + "']"));
         btnDay.click();
     }
 
-    public void typeFindYourCarFormWithCalandar(String city, LocalDate startDate, LocalDate endDate){
+    public void typeFindYourCarFormWithCalandar(String city, LocalDate startDate, LocalDate endDate) {
         type(inputCity_locator, city);
         click(inputDates_locator);
         typeCalendar(startDate);
@@ -125,13 +101,13 @@ public class HomePage extends BasePage{
                 ".removeAttribute(\"disabled\")");
     }
 
-    public boolean isTitlePresentOnClickIconFooter(FooterMenuItem item, String title){
+    public boolean isTitlePresentOnClickIconFooter(FooterMenuItem item, String title) {
         getDriver().findElement(By.xpath(item.getLocator())).click();
         return new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.titleContains(title));
     }
 
-    public boolean isTitlePresentOnClickBtnHeader(HeaderMenuItem item, String title){
+    public boolean isTitlePresentOnClickBtnHeader(HeaderMenuItem item, String title) {
         getDriver().findElement(By.xpath(item.getLocator())).click();
         return new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.titleContains(title));

@@ -53,6 +53,7 @@ public abstract class BasePage {
         return header;
     }
 
+
     //----------------------------------base actions---------------------------------------------
     protected void click(By locator) {
         logger.info("clicking on element" + locator.toString());
